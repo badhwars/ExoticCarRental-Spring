@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="ISO-8859-1">
+<title>Exotic Car Rentals</title>
+<link rel="stylesheet" type="text/css" href="/CSS/style.css" />
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+</head>
+<body>
+	<nav>
+		<div>
+			<a href="/" th:href="@{/}" class="logo">EXOTIC CAR RENTALS</a>
+		</div>
+		<div class="nav-content">
+			<div sec:authorize="!isAuthenticated()">
+				<a href="/login" th:href="@{/login}">Account</a>
+			</div>
+			<div sec:authorize="isAuthenticated()" class="dropdown">
+				<i class='fas fa-user' style='color: #eee'></i><span
+					sec:authentication="name" class="dropbtn"></span> <span
+					class="dropdown-content"> <a href="#" th:href="@{/logout}"
+					class="button">Logout</a>
+				</span>
+			</div>
+			<div>
+				<a href="/ContactUs" th:href="@{/ContactUs}">Contact Us</a>
+			</div>
+		</div>
+	</nav>
+	<div class="card">
+		<form action="#" th:action="@{/modifyCarAdmin}" th:object="${car}">
+			<h1><span th:text="*{make}" class="logo"></span><span th:text="*{model}" class="logo"></span></h1><br><br>
+			<input type="hidden" th:field="*{id}" /> 
+			<p> Car Make : <input type="text" th:field="*{make}" /></p> 
+			<p> Car Model : <input type="text" th:field="*{model}" /></p> 
+			<p> Year Manufactured : <input type="number" th:field="*{year}" /><br></p>
+			<p> Daily Charge : <input type="number" th:field="*{dailyCharge}" /></p> 
+			<input type="submit" value="Save Changes"  class="button" />
+		</form>
+		<a href="/admin"><button class="button">Cancel</button></a>
+	</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thyeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Exotic Car Rentals</title>
+<link rel="stylesheet" type="text/css" href="/CSS/style.css" />
+</head>
+<body class="LoginPage">
+	<nav class="bg-black">
+		<div>
+			<a href="/" th:href="@{/}" class="logo">EXOTIC CAR RENTALS</a>
+		</div>
+	</nav>
+	<div class="card">
+		<form method="post" th:action="@{/login}">
+			<h1 class="logo">Login</h1>
+			<br> <br> <br>
+			<div th:if="${param.error}">
+				<div class="error">Invalid Username or Pasword</div>
+			</div>
+
+			<div th:if="${param.logout}">
+				<div class="attention">You have been logged out.</div>
+			</div>
+			<br>
+			<div>
+				<label for="username">Username</label> : <input type="text"
+					id="username" name="username" autofocus="autofocus"
+					placeholder="Username">
+			</div>
+			<div>
+				<label for="password">Password</label> : <input type="password"
+					id="password" name="password" placeholder="Password">
+			</div>
+
+			<div>
+				<input type="submit" name="login-submit" id="login-submit"
+					value="Sign In">
+			</div>
+		</form>
+		<br>
+		<p>
+			<a href="/register" th:href="@{/register}" class="attention">Don't
+				have an account? <br>Create one here, It's completely free.
+			</a>
+		</p>
+		<a href="/" th:href="@{/}"><button class="button">Or go
+				back to Home page</button></a>
+	</div>
+</body>
+</html>

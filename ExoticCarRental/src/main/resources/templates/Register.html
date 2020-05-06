@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thyeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Exotic Car Rentals</title>
+<link rel="stylesheet" type="text/css" href="/CSS/style.css" />
+</head>
+<body class="RegisterPage">
+	<nav class="bg-black">
+		<div>
+			<a href="/" th:href="@{/}" class="logo">EXOTIC CAR RENTALS</a>
+		</div>
+	</nav>
+	<div class="card">
+		<form name="form" action="#" th:action="@{/register}" method="post">
+			<h1 class="logo">Sign Up</h1>
+			<br> <br> <br>
+			<p>
+				First Name:<input type="text" name="fName" required />
+			</p>
+			<p>
+				Last Name:<input type="text" name="lName" required />
+			</p>
+			<p>
+				Address:<input type="text" name="address" required />
+			</p>
+			<p>
+				UserName:<input type="text" name="username" required />
+			</p>
+			<p>
+				Password:<input type="password" name="password" required />
+			</p>
+			<p>
+				Phone Number:<input type="number" name="phone" required />
+			</p>
+			<br> <input type="submit" value="Sign Up" class="button" />
+		</form>
+	</div>
+
+</body>
+</html>

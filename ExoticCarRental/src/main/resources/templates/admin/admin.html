@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="ISO-8859-1">
+<title>Exotic Car Rentals</title>
+<link rel="stylesheet" type="text/css" href="/CSS/style.css" />
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+</head>
+<body class="adminPage">
+	<nav>
+		<div>
+			<a href="/" th:href="@{/}" class="logo">EXOTIC CAR RENTALS</a>
+		</div>
+		<div class="nav-content">
+			<div sec:authorize="!isAuthenticated()">
+				<a href="/login" th:href="@{/login}">Account</a>
+			</div>
+			<div sec:authorize="isAuthenticated()" class="dropdown">
+				<i class='fas fa-user' style='color: #eee'></i><span
+					sec:authentication="name" class="dropbtn"></span> <span
+					class="dropdown-content"> <a href="#" th:href="@{/logout}"
+					class="button">Logout</a>
+				</span>
+			</div>
+			<div>
+				<a href="/ContactUs" th:href="@{/ContactUs}">Contact Us</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="tableView">
+		<h3 class="logo">Car Table</h3>
+		<table>
+			<tr>
+				<th>Car ID</th>
+				<th>Car Make</th>
+				<th>Car Model</th>
+				<th>Year Manufactured</th>
+				<th>Daily Charge</th>
+				<th>Modify Data</th>
+			</tr>
+			<tr th:each="c : ${carList}">
+				<td th:text="${c.id}">id</td>
+				<td th:text="${c.make}">make</td>
+				<td th:text="${c.model}">model</td>
+				<td th:text="${c.year}">year</td>
+				<td th:text="'$'+${c.dailyCharge}">dailyCharge</td>
+				<td><a href="" th:href="@{/editCar/{id}(id=${c.id})}"><button
+							class="button">Edit</button></a> <a href=""
+					th:href="@{/deleteCar/{id}(id=${c.id})}"><button class="button">Delete</button></a></td>
+			</tr>
+		</table>
+	</div>
+	<div class="card">
+		<form method="post" th:action="@{/addCar}" th:object="${car}">
+			<h2 class="logo">Add Car</h2>
+			<br> <input type="hidden" name="id" th:field="*{id}">
+			<p>
+				Car Make: <input type="text" name="make" placeholder="Car Make"
+					th:field="*{make}" required />
+			</p>
+			<p>
+				Car Model : <input type="text" name="model" placeholder="Car Model"
+					th:field="*{model}" required />
+			</p>
+			<p>
+				Year Manufactured : <input type="number" name="year"
+					placeholder="Year Manufactured" th:field="*{year}" required /><br>
+			</p>
+			<p>
+				Daily Charge : $<input type="number" name="dailyCharge"
+					placeholder="Daily Charge" th:field="*{dailyCharge}" required />
+			</p>
+			<input type="submit" value="Add Car">
+		</form>
+	</div>
+	<div class="tableView">
+		<h3 class="logo">User Table</h3>
+		<table>
+			<tr>
+				<th>Customer ID</th>
+				<th>first Name</th>
+				<th>Last Name</th>
+				<th>Address</th>
+				<th>Phone Number</th>
+				<th>User name</th>
+				<th>Enabled</th>
+				<th>Action</th>
+			</tr>
+			<tr th:each="c : ${customerList}">
+				<td th:text="${c.id}">id</td>
+				<td th:text="${c.fName}">first name</td>
+				<td th:text="${c.lName}">last name</td>
+				<td th:text="${c.address}">address</td>
+				<td th:text="${c.phoneNumber}">Phone #</td>
+				<td th:text="${c.username}">user name</td>
+				<td th:text="${c.enabled}">enabled</td>
+				<td><a href="" th:href="@{/editCustomer/{id}(id=${c.id})}"><button
+							class="button">Edit</button></a> <a href=""
+					th:href="@{/deleteCustomer/{id}(id=${c.id})}"><button
+							class="button">Delete</button></a></td>
+			</tr>
+		</table>
+	</div>
+
+</body>
+</html>

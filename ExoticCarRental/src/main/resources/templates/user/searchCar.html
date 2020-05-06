@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="ISO-8859-1">
+<title>Exotic Car Rentals</title>
+<link rel="stylesheet" type="text/css" href="/CSS/style.css" />
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+</head>
+<body onload="getCarMake()">
+	<nav>
+		<div>
+			<a href="/" th:href="@{/}" class="logo">EXOTIC CAR RENTALS</a>
+		</div>
+		<div class="nav-content">
+			<div sec:authorize="!isAuthenticated()">
+				<a href="/login" th:href="@{/login}">Account</a>
+			</div>
+			<div sec:authorize="isAuthenticated()" class="dropdown">
+				<i class='fas fa-user' style='color: #eee'></i><span
+					sec:authentication="name" class="dropbtn"></span> <span
+					class="dropdown-content"> <a href="#" th:href="@{/logout}"
+					class="button">Logout</a>
+				</span>
+			</div>
+			<div>
+				<a href="/ContactUs" th:href="@{/ContactUs}">Contact Us</a>
+			</div>
+		</div>
+	</nav>
+	<br><br><br><br>
+	<h1 id="makeTitle" class="logo"></h1>
+	<div class="gridView">
+		<div class="infoCards" th:each="c:${carByMake}">
+			<div class="imageBox">
+				<img th:src="'/./Images/Cars/'+${c.image}" class="carImage">
+			</div>
+			<div class="cardContainer">
+				<h1>
+					<span th:text="${c.make}" id="make"></span> <span
+						th:text="${c.model}"></span>
+				</h1>
+				<br> <br>
+				<p>
+					Year Manufactured: <span th:text="${c.year}"></span>
+				</p>
+				<p>
+					Daily Charge: $<span th:text="${c.dailyCharge}"></span>
+				</p>
+				<br>
+				<p>
+				
+					<a th:href="@{'/user/book?getCar='+${c.id}}"><button class="button">Rent</button></a>
+				</p>
+			</div>
+
+		</div>
+	</div>
+<script src="/./JS/script.js"></script>
+</body>
+</html>
